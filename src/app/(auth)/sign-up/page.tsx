@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import * as z  from "zod"
 import Link from 'next/link'
-import {useDebounceValue} from 'usehooks-ts'
+import {useDebounceCallback, useDebounceValue} from 'usehooks-ts'
 import { useToast } from "@/components/ui/use-toast"
 import { useRouter } from 'next/navigation'
 import { signUpSchema } from '@/schemas/signUpSchema'
@@ -22,7 +22,7 @@ const page = () => {
   const [usernameMessage,setUsernameMessage] = useState('')
   const [isCheckingUsername,setIsCheckingUsername] = useState(false)
   const [isSubmitting,setIsSubmitting] = useState(false)
-  const debouncedUsername=useDebounceValue(username,300)
+  const debounced=useDebounceCallback(setUsername,500)
   const { toast } = useToast()
   const router = useRouter()
 
@@ -38,11 +38,11 @@ const page = () => {
 
   useEffect(() => {
    const checkUsernameUnique = async()=>{
-    if( debouncedUsername){
+    if( username){
       setIsCheckingUsername(true)
       setUsernameMessage('')
       try {
-        const response = await axios.get(`/api/check-username-unique?username=${debouncedUsername}`)
+        const response = await axios.get(`/api/check-username-unique?username=${username}`)
         setUsernameMessage(response.data.message)
       } catch (error) {
         const axiosError = error as AxiosError<ApiResponse>;
@@ -58,7 +58,7 @@ const page = () => {
     }
 
     checkUsernameUnique()
-  }, [debouncedUsername])
+  }, [username])
 
    const onSubmit = async(data:z.infer<typeof signUpSchema>)=>{
     setIsSubmitting(true)
@@ -106,7 +106,7 @@ const page = () => {
                   {...field}
                   onChange={(e) => {
                     field.onChange(e);
-                    setUsername(e.target.value);
+                    debounced(e.target.value);
                   }}
                 />
                 {isCheckingUsername && <Loader2 className="animate-spin" />}
