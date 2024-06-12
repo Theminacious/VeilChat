@@ -60,12 +60,18 @@ export default function SignInForm() {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gradient-to-r from-gray-900 via-black to-gray-900">
+    <div className="relative flex justify-center items-center min-h-screen bg-gray-900 overflow-hidden">
+      {/* Animated Background */}
+      <div className="absolute inset-0">
+        <div className="absolute inset-0 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 opacity-70"></div>
+        <div className="absolute inset-0 bg-noise"></div>
+      </div>
+
       <motion.div
-        initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0 }}
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.5 }}
-        className="w-full max-w-md p-8 space-y-8 bg-gray-800 rounded-lg shadow-lg"
+        className="relative z-10 w-full max-w-md p-8 space-y-8 bg-gray-800 rounded-lg shadow-lg"
       >
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -73,10 +79,10 @@ export default function SignInForm() {
           transition={{ delay: 0.2, duration: 0.5 }}
           className="text-center"
         >
-          <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl mb-6 text-white">
+          <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl mb-6 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-500">
             Welcome Back to VeilChat
           </h1>
-          <p className="mb-4 text-gray-400">Sign in to continue your secret conversations</p>
+          <p className="mb-4 text-gray-300">Sign in to continue your secret conversations</p>
         </motion.div>
         <Form {...form}>
           <motion.form
@@ -93,9 +99,9 @@ export default function SignInForm() {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel className="text-gray-300">Email/Username</FormLabel>
-                  <Input 
-                    {...field} 
-                    className="w-full border-gray-600 bg-gray-700 text-white rounded-md shadow-sm focus:ring focus:ring-blue-500"
+                  <Input
+                    {...field}
+                    className="w-full border-gray-700 bg-gray-900 text-white rounded-md shadow-sm focus:ring focus:ring-purple-500"
                   />
                   <FormMessage />
                 </FormItem>
@@ -107,19 +113,16 @@ export default function SignInForm() {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel className="text-gray-300">Password</FormLabel>
-                  <Input 
-                    type="password" 
-                    {...field} 
-                    className="w-full border-gray-600 bg-gray-700 text-white rounded-md shadow-sm focus:ring focus:ring-blue-500"
+                  <Input
+                    type="password"
+                    {...field}
+                    className="w-full border-gray-700 bg-gray-900 text-white rounded-md shadow-sm focus:ring focus:ring-purple-500"
                   />
                   <FormMessage />
                 </FormItem>
               )}
             />
-            <Button 
-              className='w-full bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 focus:ring focus:ring-blue-300' 
-              type="submit"
-            >
+            <Button className="w-full bg-purple-600 text-white rounded-lg shadow-md hover:bg-purple-700 focus:ring focus:ring-purple-300" type="submit">
               Sign In
             </Button>
           </motion.form>
@@ -130,9 +133,9 @@ export default function SignInForm() {
           transition={{ delay: 0.5, duration: 0.5 }}
           className="text-center mt-4"
         >
-          <p className="text-gray-400">
+          <p className="text-gray-300">
             Not a member yet?{' '}
-            <Link href="/sign-up" className="text-blue-500 hover:text-blue-400">
+            <Link href="/sign-up" className="text-purple-500 hover:text-purple-400">
               Sign up
             </Link>
           </p>
