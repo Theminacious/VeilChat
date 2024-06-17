@@ -16,12 +16,12 @@ function Navbar() {
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="p-4 md:p-6 shadow-md bg-gradient-to-r from-purple-600 via-blue-500 to-purple-600 text-white"
+      className="p-4 md:p-6 shadow-md bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 text-white"
     >
       <div className="container mx-auto flex flex-col md:flex-row justify-between items-center">
         <motion.a
           href="#"
-          className="text-2xl font-extrabold mb-4 md:mb-0 text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-red-500"
+          className="text-2xl font-extrabold mb-4 md:mb-0 text-transparent bg-clip-text bg-gradient-to-r from-gray-400 to-gray-600"
           whileHover={{ scale: 1.1 }}
         >
           VeilChat
@@ -33,7 +33,7 @@ function Navbar() {
             </span>
             <Button
               onClick={() => signOut()}
-              className="w-full md:w-auto bg-white text-black rounded-lg shadow-md hover:bg-gray-200 focus:ring focus:ring-gray-300"
+              className="w-full md:w-auto bg-gray-700 text-white rounded-lg shadow-md hover:bg-gray-600 focus:ring focus:ring-gray-500"
               variant="outline"
             >
               Logout
@@ -42,7 +42,7 @@ function Navbar() {
         ) : (
           <Link href="/sign-in">
             <Button
-              className="w-full md:w-auto bg-white text-black rounded-lg shadow-md hover:bg-gray-200 focus:ring focus:ring-gray-300"
+              className="w-full md:w-auto bg-gray-700 text-white rounded-lg shadow-md hover:bg-gray-600 focus:ring focus:ring-gray-500"
               variant="outline"
             >
               Login
