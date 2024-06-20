@@ -4,7 +4,7 @@ import { Form, FormField, FormItem, FormLabel, FormMessage } from '@/components/
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/components/ui/use-toast';
 import { verifySchema } from '@/schemas/verifySchema';
-import ApiResponse from '@/types/ApiResponse';
+import {ApiResponse} from '@/types/ApiResponse';
 import { zodResolver } from '@hookform/resolvers/zod';
 import axios, { AxiosError } from 'axios';
 import { useParams, useRouter } from 'next/navigation';

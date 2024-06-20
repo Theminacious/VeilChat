@@ -1,8 +1,8 @@
-import {z} from 'zod'
+import { z } from 'zod'
 
-export const acceptMessagesSchema = z.object({
-    content:z
+export const messageSchema = z.object({
+  content: z
     .string()
-    .min(10,"Content cannot be empty")
-    .max(300,"Content must be less than 300 characters")
-})
+    .min(10, { message: 'Content must be at least 10 characters.' })
+    .max(300, { message: 'Content must not be longer than 300 characters.' }),
+});

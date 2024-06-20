@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { Switch } from '@/components/ui/switch';
 import { useToast } from '@/components/ui/use-toast';
-import { Message } from '@/model/user.models';
+import { Message } from '@/model/User';
 import { ApiResponse } from '@/types/ApiResponse';
 import { zodResolver } from '@hookform/resolvers/zod';
 import axios, { AxiosError } from 'axios';
@@ -14,7 +14,7 @@ import { User } from 'next-auth';
 import { useSession } from 'next-auth/react';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { acceptMessagesSchema } from '@/schemas/acceptMessageSchema';
+import { AcceptMessageSchema } from '@/schemas/acceptMessageSchema';
 
 function UserDashboard() {
   const [messages, setMessages] = useState<Message[]>([]);
@@ -30,7 +30,7 @@ function UserDashboard() {
   const { data: session } = useSession();
 
   const form = useForm({
-    resolver: zodResolver(acceptMessagesSchema),
+    resolver: zodResolver(AcceptMessageSchema),
   });
 
   const { register, watch, setValue } = form;
@@ -40,7 +40,7 @@ function UserDashboard() {
     setIsSwitchLoading(true);
     try {
       const response = await axios.get<ApiResponse>('/api/accept-messages');
-      setValue('acceptMessages', response.data.isAcceptingMessage);
+      setValue('acceptMessages', response.data.isAcceptingMessages);
     } catch (error) {
       const axiosError = error as AxiosError<ApiResponse>;
       toast({
@@ -71,6 +71,7 @@ function UserDashboard() {
       } catch (error) {
         const axiosError = error as AxiosError<ApiResponse>;
         toast({
+          title: 'Error',
           description:
             axiosError.response?.data.message ?? 'Failed to fetch messages',
           variant: 'destructive',

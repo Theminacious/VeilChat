@@ -13,7 +13,7 @@ export async function DELETE(
   const messageId = params.messageid;
   await dbConnect();
   const session = await getServerSession(authOptions);
-  const _user: User = session?.user as User;
+  const _user: User = session?.user;
   if (!session || !_user) {
     return Response.json(
       { success: false, message: 'Not authenticated' },
